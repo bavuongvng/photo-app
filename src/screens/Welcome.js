@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 import { NavigatorMaps } from '../navigators';
+import { checkPermission } from '../utils';
 
 const styles = StyleSheet.create({
   root: {
@@ -23,6 +24,11 @@ export const Welcome = ({ navigation }) => {
   const gotoCamera = () => {
     navigation.navigate(NavigatorMaps.Camera);
   };
+
+  useEffect(() => {
+    checkPermission();
+  }, []);
+
   return (
     <View style={styles.root}>
       <Text>Welcome Screen</Text>
