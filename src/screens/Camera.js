@@ -1,6 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import CameraRoll from '@react-native-community/cameraroll';
+
+import { Photo } from '../components';
 
 const styles = StyleSheet.create({
   root: {
@@ -27,20 +30,41 @@ const styles = StyleSheet.create({
 
 export const Camera = () => {
   const cameraRef = useRef();
+  const [photo, setPhoto] = useState(null);
 
   const handleTakePhoto = async () => {
     const res = await cameraRef.current.takePictureAsync();
+    setPhoto(res.uri);
     console.log({ res });
+  };
+
+  const handleSave = async () => {
+    try {
+      await CameraRoll.save(photo, { type: 'photo', album: 'Nails' });
+      setPhoto(null);
+      console.log('Success');
+    } catch (error) {
+      console.log({ errorSave: error });
+    }
+  };
+  const handleCancel = () => {
+    setPhoto(null);
   };
 
   return (
     <View style={styles.root}>
-      <View style={styles.view}>
-        <RNCamera ref={cameraRef} style={styles.camera} />
-      </View>
-      <TouchableOpacity onPress={handleTakePhoto} style={styles.btn}>
-        <Text style={styles.label}>Take Photo</Text>
-      </TouchableOpacity>
+      {photo ? (
+        <Photo uri={photo} onSave={handleSave} onCancel={handleCancel} />
+      ) : (
+        <>
+          <View style={styles.view}>
+            <RNCamera ref={cameraRef} style={styles.camera} />
+          </View>
+          <TouchableOpacity onPress={handleTakePhoto} style={styles.btn}>
+            <Text style={styles.label}>Take Photo</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </View>
   );
 };
