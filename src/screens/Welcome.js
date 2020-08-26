@@ -24,6 +24,9 @@ export const Welcome = ({ navigation }) => {
   const gotoCamera = () => {
     navigation.navigate(NavigatorMaps.Camera);
   };
+  const gotoUpload = () => {
+    navigation.navigate(NavigatorMaps.Upload);
+  };
 
   useEffect(() => {
     checkPermission();
@@ -34,6 +37,9 @@ export const Welcome = ({ navigation }) => {
       <Text>Welcome Screen</Text>
       <TouchableOpacity style={styles.btn} onPress={gotoCamera}>
         <Text style={styles.label}>Take Photo</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.btn} onPress={gotoUpload}>
+        <Text style={styles.label}>Upload Photo</Text>
       </TouchableOpacity>
     </View>
   );
