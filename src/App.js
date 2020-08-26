@@ -5,6 +5,8 @@ import { View, StyleSheet } from 'react-native';
 
 import MainNavigator from './navigators';
 
+console.disableYellowBox = true;
+
 const styles = StyleSheet.create({
   root: {
     flex: 1,
