@@ -37,7 +37,7 @@ export const Camera = () => {
   useEffect(() => {
     apis.auth({
       access_token:
-        'ya29.a0AfH6SMCrT8mC5P9BUGacFlLHmH9y4sze91twmbsSppIzOTyOAbsMt8F9Wxd58emb42FhvTwmRY2kzjNdZxLT-ogYTt9SAXgbLh4znM-yTYfFsRh7GYfiIRxcsgAqrjg0122-wobZscXspp9lG1sO6rVGwO0W3d_liPcM',
+        'ya29.a0AfH6SMBgacneYKKGb6M5IzSgCRhjeMmUXQ2i5ldZZfZLD_9eOVCAsLgEpJz-6tdUwXuoPF6YXE-TAHKKKWX9QTkS0w3a1GeiVZVLK3JPF5p5nHFzJEPxUCuol066m9H_80Y18yakpwXHkOhSPC-JuxlPFOuspLgTqJuZ',
       token_type: 'Bearer',
     });
   }, []);
