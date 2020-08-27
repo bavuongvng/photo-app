@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@mtt-nails/apis": "^3.0.0-alpha-491",
     "@react-native-community/cameraroll": "^4.0.0",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/native": "^5.7.3",
