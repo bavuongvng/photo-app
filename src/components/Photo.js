@@ -44,9 +44,12 @@ const styles = StyleSheet.create({
   btnUpload: {
     backgroundColor: 'green',
   },
+  btnContinue: {
+    backgroundColor: 'blue',
+  },
 });
 
-export const Photo = ({ uri, onSave, onCancel, onUpload }) => {
+export const Photo = ({ uri, onSave, onCancel, onUpload, onContinue }) => {
   return (
     <View style={styles.root}>
       <View style={styles.flex}>
@@ -72,6 +75,13 @@ export const Photo = ({ uri, onSave, onCancel, onUpload }) => {
             style={[styles.btn, styles.btnCancel]}
             onPress={onCancel}>
             <Text style={styles.text}>Cancel</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.col}>
+          <TouchableOpacity
+            style={[styles.btn, styles.btnContinue]}
+            onPress={onContinue}>
+            <Text style={styles.text}>Continue</Text>
           </TouchableOpacity>
         </View>
       </View>

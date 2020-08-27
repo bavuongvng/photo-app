@@ -25,7 +25,7 @@ export const uploadPhoto = (data) => {
 export const upload = async (path, name) => {
   const { data } = await RNFetchBlob.fetch(
     'POST',
-    'https://photoslibrary.googleapis.com/v1/uploads',
+    `${PHOTO_API}uploads`,
     {
       Authorization: config.authorization,
       'Content-type': 'application/octet-stream',

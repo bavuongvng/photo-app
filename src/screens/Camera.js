@@ -32,11 +32,12 @@ const styles = StyleSheet.create({
 export const Camera = () => {
   const cameraRef = useRef();
   const [photo, setPhoto] = useState(null);
+  const [list, setList] = useState({});
 
   useEffect(() => {
     apis.auth({
       access_token:
-        'ya29.a0AfH6SMCTl52ZraDE9ouBU7S5rL5-o-YzPbmHmCsbwV7z9TEhv440nsqGkmyealMX9O9r0ooI2s69QsFYxKwObMyDf1zEI-27wVG7TwyNVx7VSSNg1XOxwbA86A_lqhharMdCRa18sMN7VTJaaLfYwoKUbL__LQ7ufjxB',
+        'ya29.a0AfH6SMCrT8mC5P9BUGacFlLHmH9y4sze91twmbsSppIzOTyOAbsMt8F9Wxd58emb42FhvTwmRY2kzjNdZxLT-ogYTt9SAXgbLh4znM-yTYfFsRh7GYfiIRxcsgAqrjg0122-wobZscXspp9lG1sO6rVGwO0W3d_liPcM',
       token_type: 'Bearer',
     });
   }, []);
@@ -60,12 +61,24 @@ export const Camera = () => {
   };
   const handleUpload = async () => {
     try {
-      const data = await apis.upload(photo.uri, 'testUpload');
+      const photos = { ...list };
+      photos[`Anh ${Object.keys(list).length + 1}`] = photo.uri;
+      const data = await Promise.all(
+        Object.keys(photos).map((key) => apis.upload(photos[key], key)),
+      );
       console.log({ UploadSuccess: data });
+      setList({});
       setPhoto(null);
     } catch (error) {
       console.log({ error });
     }
+  };
+  const handleContinue = () => {
+    const fileName = `Anh ${Object.values(list).length + 1}`;
+    const data = { ...list };
+    data[fileName] = photo.uri;
+    setList(data);
+    setPhoto(null);
   };
 
   return (
@@ -76,6 +89,7 @@ export const Camera = () => {
           onSave={handleSave}
           onCancel={handleCancel}
           onUpload={handleUpload}
+          onContinue={handleContinue}
         />
       ) : (
         <>
